@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aa">
+
+    <select id="getUserById" parameterType="Integer" resultType="com.wang.pojo.User">
+        select * from user where u_id=#{id}
+  </select>
+
+    <select id="getUser" resultType="com.wang.pojo.User">
+        select * from user
+    </select>
+
+    <select id="getUserByName" parameterType="String" resultType="com.wang.pojo.User">
+        /*select * from user where u_name like '%${value}%'*/
+        select * from user where u_name like "%"#{name}"%"
+    </select>
+
+    <insert id="insertUser" parameterType="com.wang.pojo.User">
+        <selectKey keyProperty="u_id" order="AFTER">
+          select last_insert_id()
+        </selectKey>
+      insert into user values(null,#{u_name},#{u_age});
+    </insert>
+
+    <delete id="deleteUserById" parameterType="Integer">
+        delete from user where u_id = #{id}
+    </delete>
+
+    <update id="updateUser"  parameterType="com.wang.pojo.User">
+        update user set u_name=#{name},u_age=#{} where u_id = #{id}
+    </update>
+</mapper>
