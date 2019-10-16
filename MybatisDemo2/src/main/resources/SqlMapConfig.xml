@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties">
+        <!--<property name="driver" value="com.mysql.jdbc.Driver" ></property>-->
+    </properties>
+
+    <typeAliases >
+       <!-- <typeAliases type="com.wang.pojo.User" alias="User"></typeAliases>-->
+        <package name="com.wang.pojo"></package>
+    </typeAliases>
+    <!-- 和spring整合后 environments配置将废除 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用jdbc事务管理 -->
+            <transactionManager type="JDBC" />
+            <!-- 数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${url}" />
+                <property name="username" value="${user}" />
+                <property name="password" value="${psw}" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="UserMapper.xml" />
+        <mapper resource="NewUserMapper.xml" />
+        <!--<mapper class="com.wang.dao.UserMapper"></mapper>-->
+        <package name="com.wang.dao"></package>
+    </mappers>
+</configuration>
